@@ -1,0 +1,5 @@
+evaluation
+docker-compose.yml
+requirements-dev.txt
+.git
+.gitignore

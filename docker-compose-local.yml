@@ -1,0 +1,8 @@
+services:
+  app:
+    build:
+      context: ./../../
+      dockerfile: apps/us-130-fl-nn/Dockerfile_local
+    environment:
+      TEST_MODE: "true"
+      PYTHONUNBUFFERED: "1"

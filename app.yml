@@ -1,0 +1,216 @@
+config:
+  hyperparams:
+  - default: hospital-readmission
+    description: Base communication id. For multi-round training the app appends
+      -round-N so every round has a unique id.
+    maxValue: null
+    minValue: null
+    name: communication_id
+    options: []
+    pattern: null
+    type: STRING
+  - default: federated_readmission_predictions.csv
+    description: CSV file written by each client into its local output directory.
+    maxValue: null
+    minValue: null
+    name: output_filename
+    options: []
+    pattern: null
+    type: STRING
+  - default: '10'
+    description: Number of federated train/aggregate rounds. Increase when the
+      federated controller processes one communication id per round.
+    maxValue: null
+    minValue: 1
+    name: federated_rounds
+    options: []
+    pattern: null
+    type: INTEGER
+  - default: '15'
+    description: Local MLP iteration budget per federated round.
+    maxValue: null
+    minValue: 1
+    name: local_max_iter
+    options: []
+    pattern: null
+    type: INTEGER
+  - default: '42'
+    description: Random seed for reproducibility
+    maxValue: null
+    minValue: null
+    name: random_state
+    options: []
+    pattern: null
+    type: INTEGER
+  - default: '0.2'
+    description: Fraction of data held out for validation
+    maxValue: null
+    minValue: null
+    name: test_size
+    options: []
+    pattern: null
+    type: FLOAT
+  - default: hospital_readmission
+    description: Name of the readmission target column (<30 / >30 / NO)
+    maxValue: null
+    minValue: null
+    name: target_column
+    options: []
+    pattern: null
+    type: STRING
+  - default: '0'
+    description: Reserved for compatibility with the reference app.
+    maxValue: null
+    minValue: null
+    name: standardize
+    options: []
+    pattern: null
+    type: BOOLEAN
+  - default: '12,8'
+    description: Comma-separated hidden layer sizes. Default mirrors the simple
+      Kaggle-style diabetes NN with 12 hidden units, then 8 hidden units.
+    maxValue: null
+    minValue: null
+    name: hidden_layer_sizes
+    options: []
+    pattern: null
+    type: STRING
+  - default: relu
+    description: MLP activation function.
+    maxValue: null
+    minValue: null
+    name: activation
+    options:
+    - relu
+    - tanh
+    - logistic
+    pattern: null
+    type: CATEGORICAL
+  - default: '150'
+    description: Total iteration budget for standalone local baselines.
+    maxValue: null
+    minValue: null
+    name: max_iter
+    options: []
+    pattern: null
+    type: INTEGER
+  - default: adam
+    description: MLP optimization algorithm
+    maxValue: null
+    minValue: null
+    name: solver
+    options:
+    - adam
+    - sgd
+    pattern: null
+    type: CATEGORICAL
+  - default: '0.0001'
+    description: L2 regularization strength.
+    maxValue: null
+    minValue: null
+    name: alpha
+    options: []
+    pattern: null
+    type: FLOAT
+  - default: '0.001'
+    description: Initial learning rate for adam/sgd.
+    maxValue: null
+    minValue: null
+    name: learning_rate_init
+    options: []
+    pattern: null
+    type: FLOAT
+  - default: '10'
+    description: MLP batch size.
+    maxValue: null
+    minValue: null
+    name: batch_size
+    options: []
+    pattern: null
+    type: STRING
+  - default: balanced
+    description: Class weighting — use 'balanced' to counter the ~11% 
+      readmission base rate
+    maxValue: null
+    minValue: null
+    name: class_weight
+    options:
+    - balanced
+    - none
+    pattern: null
+    type: CATEGORICAL
+  input:
+  - delimiter: ','
+    description: US130 clinics dataset
+    hasHeader: true
+    indexCol: null
+    maxValue: null
+    minValue: null
+    mode: null
+    name: data
+    required: true
+    shape: null
+    tabularSchema: null
+    type: CSV
+  output:
+  - delimiter: ','
+    description: Per-patient predicted readmission label and probability 
+      (validation split during training, all rows during prediction)
+    hasHeader: true
+    indexCol: null
+    maxValue: null
+    minValue: null
+    mode: null
+    name: predictions
+    required: false
+    shape: null
+    tabularSchema: null
+    type: CSV
+  - delimiter: ','
+    description: Long-form first-layer feature-weight table sorted by magnitude
+    hasHeader: true
+    indexCol: null
+    maxValue: null
+    minValue: null
+    mode: null
+    name: coefficients
+    required: false
+    shape: null
+    tabularSchema: null
+    type: CSV
+  - delimiter: ','
+    description: 'Interactive report: metrics, confusion matrix, ROC curve, feature
+      importance bar chart'
+    hasHeader: true
+    indexCol: null
+    maxValue: null
+    minValue: null
+    mode: null
+    name: explanation
+    required: false
+    shape: null
+    tabularSchema: null
+    type: HTML
+  - delimiter: ','
+    description: Plain-text training / prediction summary
+    hasHeader: true
+    indexCol: null
+    maxValue: null
+    minValue: null
+    mode: null
+    name: report
+    required: false
+    shape: null
+    tabularSchema: null
+    type: TEXT
+info:
+  longDescription: Federated neural-network training for US-130 diabetic hospital
+    readmission prediction. Each client trains locally, sends MLP layer weights
+    only, and receives a weighted mean global model for the next round.
+  name: Federated Hospital Readmission Prediction NN
+  shortDescription: Train a federated 30-day hospital readmission model without sharing
+    raw patient rows
+  slug: federated-hospital-readmission-prediction-nn
+  sourceUrl: 
+    https://gitlab.cosy.bio/cosybio/federated-learning/federated_db/apps/us130-hospital-readmission-prediction-nn
+  type: ANALYSIS

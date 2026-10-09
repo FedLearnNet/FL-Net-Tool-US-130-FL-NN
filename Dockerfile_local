@@ -1,0 +1,16 @@
+FROM gitlab.cosy.bio:5050/cosybio/federated-learning/federated_db/pyfedappwrap/base-python:0.7.9
+
+USER 0
+WORKDIR /app
+
+COPY apps/us-130-fl-nn/requirements.txt apps/us-130-fl-nn/requirements-dev.txt ./
+COPY pyfedappwrap /app/pyfedappwrap
+RUN pip install --no-cache-dir -r requirements-dev.txt
+
+COPY apps/us-130-fl-nn/ /app/
+
+RUN chown -R nonroot:nonroot /app /opt/venv \
+ && chmod -R u+rwX,g+rwX /app
+
+USER nonroot:nonroot
+CMD ["python", "-m", "main"]
