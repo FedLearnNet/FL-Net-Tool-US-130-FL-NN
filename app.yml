@@ -212,5 +212,5 @@ info:
     raw patient rows
   slug: federated-hospital-readmission-prediction-nn
   sourceUrl:
-    https://github.com/FedLearnNet/FL-Net-Tool-US-130-FL-NN.git
+    https://github.com/FedLearnNet/FL-Tool-US-130-NN
   type: ANALYSIS
