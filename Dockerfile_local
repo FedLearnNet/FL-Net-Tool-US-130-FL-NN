@@ -1,4 +1,4 @@
-FROM gitlab.cosy.bio:5050/cosybio/federated-learning/federated_db/pyfedappwrap/base-python:0.7.9
+FROM ghcr.io/fedlearnnet/python-tool-api/base-python-dep:0.7.12
 
 USER 0
 WORKDIR /app

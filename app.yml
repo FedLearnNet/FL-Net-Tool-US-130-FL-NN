@@ -129,7 +129,7 @@ config:
     pattern: null
     type: STRING
   - default: balanced
-    description: Class weighting — use 'balanced' to counter the ~11% 
+    description: Class weighting — use 'balanced' to counter the ~11%
       readmission base rate
     maxValue: null
     minValue: null
@@ -154,7 +154,7 @@ config:
     type: CSV
   output:
   - delimiter: ','
-    description: Per-patient predicted readmission label and probability 
+    description: Per-patient predicted readmission label and probability
       (validation split during training, all rows during prediction)
     hasHeader: true
     indexCol: null
@@ -211,6 +211,6 @@ info:
   shortDescription: Train a federated 30-day hospital readmission model without sharing
     raw patient rows
   slug: federated-hospital-readmission-prediction-nn
-  sourceUrl: 
-    https://gitlab.cosy.bio/cosybio/federated-learning/federated_db/apps/us130-hospital-readmission-prediction-nn
+  sourceUrl:
+    https://github.com/FedLearnNet/FL-Net-Tool-US-130-FL-NN.git
   type: ANALYSIS
